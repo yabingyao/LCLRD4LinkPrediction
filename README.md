@@ -47,7 +47,7 @@ torch_sparse==0.6.16+pt113cu117
 ## Run Setting
 Teacher GNN training. You can change "sage" to "mlp" to obtain supervised training results with MLP.
 
-```python teacher.py --datasets=cora --encoder=sage```
+```   python teacher.py --datasets=cora --encoder=sage   ```
 
 Student MLP training. L_D and L_R indicate the weights for the distribution-based and rank-based matching KD, respectively.
 
