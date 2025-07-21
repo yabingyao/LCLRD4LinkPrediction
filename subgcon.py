@@ -28,24 +28,24 @@ class SugbCon(torch.nn.Module):
 
     def forward(self, x, edge_index, batch=None, index=None):
         r""" Return node and subgraph representations of each node before and after being shuffled """
-        # 使用self.encoder对输入特征x和边索引edge_index进行编码，得到隐藏表示hidden
+        
         h = self.gcn(x, edge_index)
-        # 如果index为空，说明不需要返回特定节点的表示，直接将整个隐藏表示hidden作为结果返回
+        
         if index is None:
             return h
-        # 如果index不为空，说明需要返回特定节点的表示。代码通过索引操作获取中心节点的隐藏表示z
+        
         z = h[index]
         summary = self.pool(h, edge_index, batch)
         return z, summary
 
     def loss(self, hidden1, summary1):
         r"""Computes the margin objective."""
-        # 使用torch.randperm函数生成一个随机排列的索引shuf_index，用于对summary1的样本顺序进行打乱
+        
         shuf_index = torch.randperm(summary1.size(0))
-        # shuf_index对hidden1和summary1进行重新排序
+        
         hidden2 = hidden1[shuf_index]
         summary2 = summary1[shuf_index]
-        # logits是通过逐元素相乘和求和的方式计算得到的
+       
         logits_aa = torch.sigmoid(torch.sum(hidden1 * summary1, dim=-1))
         logits_bb = torch.sigmoid(torch.sum(hidden2 * summary2, dim=-1))
         logits_ab = torch.sigmoid(torch.sum(hidden1 * summary2, dim=-1))
