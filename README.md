@@ -51,4 +51,4 @@ Teacher GNN training. You can change "sage" to "mlp" to obtain supervised traini
 
 Student MLP training. L_D and L_R indicate the weights for the distribution-based and rank-based matching KD, respectively.
 
-python main.py --datasets=cora --LLP_D=1 --LLP_R=1 --True_label=1
+```   python main.py --datasets=cora --LLP_D=1 --LLP_R=1 --True_label=1   ```
