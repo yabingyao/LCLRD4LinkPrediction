@@ -21,3 +21,6 @@ Additionally, we leverage the Pearson correlation coefficient
 between the student and the stronger teacher model. The experimental results show that LCLRD significantly outperforms
 other baseline methods on twelve datasets, demonstrating the
 superiority of this approach.
+##  Method Overview
+<img width="1013" height="616" alt="image" src="https://github.com/user-attachments/assets/2f4a2f47-0077-4f8b-9176-e6d4822d3663" />
+
