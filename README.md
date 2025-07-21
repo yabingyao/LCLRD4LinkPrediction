@@ -27,6 +27,7 @@ superiority of this approach.
  
 ##  Experimental setup
 igb==0.1.0
+
 numpy==1.23.5
 ogb==1.3.6
 scikit_learn==1.2.1
