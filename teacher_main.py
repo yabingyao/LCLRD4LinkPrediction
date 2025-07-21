@@ -42,22 +42,7 @@ def CLtrain(CLmodel,subgraph,data,optimizer,sample_number,datasets,epochs):
 
 
 def get_all_node_emb(CLmodel,data,hidden_size,sample_number,subgraph):
-     # Obtain central node embs from subgraphs ，
-     # 通过np.arange函数创建了一个从0到num_node的整数数组，并根据mask筛选出中心节点的索引。这些索引存储在node_list中
-     #mask = mask.cpu()  # 将张量移动到 CPU
-
-     #num_node = data.x.size(0)
-     #node_list = np.arange(0, num_node, 1)[mask]
-     # list_size = node_list.size
-     # # 创建了一个大小为(list_size, args.hidden_size)的零张量z，其中list_size是中心节点的数量，args.hidden_size是嵌入表示的维度
-     # z = torch.Tensor(list_size,hidden_size).cuda()
-     # # group_nb，表示将中心节点分成多少组进行处理。这是通过将中心节点数量除以批次大小(args.batch_size)并向上取整得到的
-     # group_nb = math.ceil(list_size / sample_number)
-     # for i in range(group_nb):  # 确定当前组的起始索引(minn)和结束索引(maxx)，然后从node_list中获取相应的节点子集
-     #     maxx = min(list_size, (i + 1) * sample_number)
-     #     minn = i * sample_number
-     #     batch, index = subgraph.search(node_list[minn:maxx])
-         # 子集被传递给model进行处理，并返回节点的嵌入表示。
+     
      num_node = data.x.size(0)
      node_list = np.arange(0, num_node, 1)
      batch, index = subgraph.search(node_list)
@@ -66,9 +51,7 @@ def get_all_node_emb(CLmodel,data,hidden_size,sample_number,subgraph):
      return node
 
 
-#split_edge-训练集、测试集、验证集
-#data它表示图数据集的所有信息（节点特征、邻接矩阵、标签）
-#dataset 对象来获取图数据集的名称、大小等信息
+
 def BCEtrain(CLmodel, predictor, data, split_edge, optimizer, batch_size, datasets, transductive,
              hidden_channels,sample_number,subgraph):
     if transductive == "transductive":
@@ -353,14 +336,14 @@ def main():
 
             if results[args.metric][0] >= best_val:
                 best_val = results[args.metric][0]
-                cnt_wait = 0  # cnt_wait 变量用于跟踪指标没有改进的次数
+                cnt_wait = 0  
             else:
                 cnt_wait += 1
 
             for key, result in results.items():  #用于将训练结果记录到日志文件
                 loggers[key].add_result(run, result)
 
-            if epoch % args.log_steps == 0:  #检查当前 epoch 是否是 args.log_steps 参数的倍数。如果是，则代码继续打印训练结果。
+            if epoch % args.log_steps == 0:  
                 if args.transductive == "transductive":
                     for key, result in results.items():
                         valid_hits, test_hits = result
