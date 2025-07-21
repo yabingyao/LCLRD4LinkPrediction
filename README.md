@@ -35,3 +35,6 @@ torch==1.13.1
 torch_cluster==1.6.0
 torch_geometric==2.2.0
 torch_sparse==0.6.16+pt113cu117
+
+## Run Setting
+python tteacher.py --datasets=cora --encoder=sage
